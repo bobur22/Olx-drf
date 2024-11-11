@@ -1,0 +1,83 @@
+{% extends "account/base_entrance.html" %}
+{% load allauth i18n %}
+{% block head_title %}
+    {% trans "Signup" %}
+{% endblock head_title %}
+{% block content %}
+    {% if PASSKEY_SIGNUP_ENABLED %}
+        {% element button href=signup_by_passkey_url tags="prominent,signup,outline,primary" %}
+            {% trans "Sign up using a passkey" %}
+        {% endelement %}
+    {% endif %}
+    {% if SOCIALACCOUNT_ENABLED %}
+        {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
+    {% endif %}
+
+    {% url 'account_signup' as login_url_1 %}
+    {% setvar link_sign_up %}
+        <a href="{{ signup_url }}" class="
+        {% if request.path == login_url_1 %}active{% endif %}">
+    {% endsetvar %}
+{% setvar end_link_sign_up %}
+    </a>
+{% endsetvar %}
+
+    {% url 'account_login' as login_url_2 %}
+    {% setvar link_login %}
+        <a href="{{ login_url }}" class="
+        {% if request.path == login_url_2 %}active{% endif %}">
+    {% endsetvar %}
+{% setvar end_link_login %}
+    </a>
+{% endsetvar %}
+
+    <div class="c_login_signup">
+        <div class="or pt-3 mx-auto">
+            <hr>
+            <span>или</span>
+            <hr>
+        </div>
+        <div class="col s12 pt-5 d-flex justify-content-between">
+            <div class="border_1 col-6">
+                {{ link_login }}
+                <button class="btn col-12" type="button">
+                    <p class="mx-auto">
+                        Войти
+                    </p>
+                </button>
+                {{ end_link_login }}
+            </div>
+            <div class="border_2 col">
+                {{ link_sign_up }}
+                <button class="btn col-12" type="button">
+                    <p class="mx-auto">
+                        Зарегистрироваться
+                    </p>
+                </button>
+                {{ end_link_sign_up }}
+            </div>
+        </div>
+    </div>
+    <div class="form_css">
+    {% if not SOCIALACCOUNT_ONLY %}
+        <br/>
+        {% url 'account_signup' as action_url %}
+        {% element form form=form method="post" action=action_url tags="entrance,signup" %}
+            {% slot body %}
+                {% csrf_token %}
+                {% element fields form=form unlabeled=True %}
+                {% endelement %}
+                {{ redirect_field }}
+            {% endslot %}
+            {% slot actions %}
+                <input class="btn form-control mt-5" type="submit" style="
+                height: 50px;
+                font-size: 16px;
+                font-weight: bolder;
+                border: #002F34 solid 3px;"
+                       value="{% trans "Sign Up" %}"/>
+            {% endslot %}
+        {% endelement %}
+    {% endif %}
+    </div>
+{% endblock content %}

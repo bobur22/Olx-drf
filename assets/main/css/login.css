@@ -1,0 +1,130 @@
+
+body {
+    background-blend-mode: multiply;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 100%;
+    background-size: 5900px;
+    box-sizing: border-box;
+    /*animation-duration: 4s;*/
+    /*animation-name: image_animation;*/
+    /*animation-timing-function: ease-in-out;*/
+    /*position: relative;*/
+}
+
+.backgr_i_ls > img {
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-blend-mode: multiply;
+
+    /*animation-duration: 4s;*/
+    /*animation-name: image_animation;*/
+    /*transform: scale(4);*/
+}
+
+.link_btn {
+    color: #002F34;
+}
+
+.link_btn > button {
+    font-size: 16px;
+    font-weight: bolder;
+    border: #002F34 solid 3px;
+}
+
+.link_btn > button:hover {
+    border: #002F34 solid 3px;
+    background-color: #002F34;
+    color: white;
+}
+
+.c_login_signup > div > div > a {
+    padding: 15px 0px;
+    border-bottom: 3px solid #002F34;
+}
+
+
+.c_login_signup > div > div > a:hover {
+    border: 3px solid #002F34;
+    color: #002F34;
+    padding: 15px 0px;
+    border-radius: 5px;
+}
+
+.c_login_signup > div > div > a.active {
+    border: 3px solid #002F34;
+    color: #002F34;
+    padding: 15px 0px;
+    border-radius: 5px;
+}
+
+.or {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.or > span {
+    padding: 0 20px 0 20px;
+    color: #002F34;
+    font-weight: bolder;
+}
+
+.or > hr {
+    width: 210px;
+}
+
+.form_css > form > p input {
+    border: none;
+    background-color: rgb(242, 244, 245);
+    border-radius: 5px;
+    padding-left: 20px;
+}
+
+.form_css > form > input {
+    color: #002F34;
+    height: 50px;
+    font-size: 16px;
+    font-weight: bolder;
+    border: 3px solid #002F34;
+    border-radius: 5px;
+}
+
+.form_css > form > input:hover {
+    color: white;
+    border: 3px solid #002F34;
+    background-color: #002F34;
+}
+
+.form_css > form > p > span > a {
+    color: #002F34;
+}
+
+@keyframes image_animation {
+    0% {
+        background-size: cover;
+        transform: scale(1.2);
+    }
+
+    25% {
+        transform: scale(1.7);
+    }
+
+    50% {
+        transform: scale(2.3);
+    }
+
+    80% {
+        transform: scale(3.6);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(4.1);
+    }
+}
