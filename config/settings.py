@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 import ssl
 import smtplib
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,14 +22,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-!r30n*zzo%m!&w@jn!8w36h%jvlx8v@#2)6&p_&lqrpdhsjz#o'
+#
+# with open(os.path.join(BASE_DIR, '.env')) as f:
+#     SECRET_KEY = f.read().strip()
+
+with open(os.path.join(BASE_DIR, '.env')) as f:
+    for line in f:
+        if line.startswith("SECRET_KEY="):
+            SECRET_KEY = line.split("=", 1)[1].strip()
+            break
 
 CORS_ALLOW_ALL_ORIGINS = True
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-ssl._create_default_https_context = ssl._create_unverified_context
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST_USER = 'allayorovbobur22@gmail.com'
@@ -108,6 +115,16 @@ TEMPLATES = [
     },
 ]
 
+with open(os.path.join(BASE_DIR, '.env')) as f:
+    for line in f:
+        if line.startswith("client_id="):
+            client_id = line.split("=", 1)[1].strip()
+        if line.startswith("secret="):
+            secret = line.split("=", 1)[1].strip()
+            break
+
+print(client_id, secret)
+
 SOCIALACCOUNT_PROVIDERS = {
     # 'github': {
     #     'APP': {
@@ -122,8 +139,8 @@ SOCIALACCOUNT_PROVIDERS = {
             'email'
         },
         'APP': {
-            'client_id': '492634124645-fogaqd9fcjm20br36hcdqtavosd0ornm.apps.googleusercontent.com',
-            'secret': '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'
+            'client_id': client_id,
+            'secret': secret,
         },
         'AUTH_PARAMS': {'access_type': 'online', },
     },
